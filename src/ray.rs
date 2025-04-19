@@ -1,3 +1,3 @@
-pub struct Ray{
-
-};
+pub struct Ray {
+    a: i32,
+}

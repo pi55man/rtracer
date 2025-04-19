@@ -1,10 +1,4 @@
-use core::ops;
-
-// TODO: color struct that implements debug
-// TODO: implement new for Vec3
-// TODO: figure out f32 and u64
-
-
+#[derive(Debug, Clone, Copy)]
 pub struct Vec3 {
     pub x: f32,
     pub y: f32,
@@ -13,33 +7,44 @@ pub struct Vec3 {
 
 #[allow(dead_code)]
 impl Vec3 {
-    fn dotproduct(self, rhs: Self) -> f32 {
+    pub fn new() -> Self {
+        Vec3 {
+            x: 1.0,
+            y: 1.0,
+            z: 1.0,
+        }
+    }
+
+    pub fn dotproduct(self, rhs: Self) -> f32 {
         self.x * rhs.x + self.y * rhs.y + self.z * rhs.z
     }
 
-    fn crossproduct(self, rhs: Self) -> Self {
+    pub fn crossproduct(self, rhs: Self) -> Self {
         let x = self.y * rhs.z - self.z * rhs.y;
         let y = self.x * rhs.z - self.z * rhs.x;
         let z = self.x * rhs.y - self.y * rhs.x;
         Vec3 { x, y, z }
     }
-    
-    fn length_squared(&self) -> f32{
+
+    pub fn length_squared(&self) -> f32 {
         self.x * self.x + self.y * self.y + self.z * self.z
     }
 
-    fn length(&self) -> Option<f32>{
+    pub fn length(&self) -> Option<f32> {
         Some(self.length_squared().sqrt())
     }
 
-    fn unit(self) -> Option<Vec3> {
-        if let Some(l) = self.length(){
-            Some(Vec3 { x: self.x / l, y: self.y / l, z: self.z / l })
+    pub fn unit(self) -> Option<Vec3> {
+        if let Some(l) = self.length() {
+            Some(Vec3 {
+                x: self.x / l,
+                y: self.y / l,
+                z: self.z / l,
+            })
         } else {
             None
         }
     }
-
 }
 
 impl core::ops::Add for Vec3 {
