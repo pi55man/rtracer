@@ -1,4 +1,6 @@
-#[derive(Debug, Clone, Copy)]
+use std::fmt::Debug;
+
+#[derive(Clone, Copy)]
 pub struct Vec3 {
     pub x: f32,
     pub y: f32,
@@ -104,5 +106,11 @@ impl core::ops::Neg for Vec3 {
             y: -self.y,
             z: -self.z,
         }
+    }
+}
+
+impl Debug for Vec3 {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} {} {}\n", self.x, self.y, self.z)
     }
 }
